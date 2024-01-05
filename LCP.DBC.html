@@ -5,33 +5,46 @@
         <script>
         window.__OVERLAY__ = /overlay/.test(location.pathname);
         window.__BILLING_STANDALONE__ = /^\/billing/.test(location.pathname);
-        window.GLOBAL_ENV = {
-        API_ENDPOINT: "//" + window.location.host + '/d/api',
-        API_VERSION: 9,
-        GATEWAY_ENDPOINT: 'wss://gateway.discord.gg',
-        WEBAPP_ENDPOINT: "//" + window.location.host,
-        CDN_HOST: 'cdn.discordapp.com',
-        ASSET_ENDPOINT: "//" + window.location.host,
-        MEDIA_PROXY_ENDPOINT: '//media.discordapp.net',
-        WIDGET_ENDPOINT: '//discord.com/widget',
-        INVITE_HOST: 'discord.gg',
-        GUILD_TEMPLATE_HOST: 'discord.new',
-        GIFT_CODE_HOST: 'discord.gift',
-        RELEASE_CHANNEL: 'canary',
-        MARKETING_ENDPOINT: '//discord.com',
-        BRAINTREE_KEY: 'production_5st77rrc_49pp2rp4phym7387',
-        STRIPE_KEY: 'pk_live_CUQtlpQUF0vufWpnpUmQvcdi',
-        NETWORKING_ENDPOINT: '//router.discordapp.net',
-        RTC_LATENCY_ENDPOINT: '//latency.discord.media/rtc',
-        ACTIVITY_APPLICATION_HOST: 'discordsays.com',
-        PROJECT_ENV: 'production',
-        REMOTE_AUTH_ENDPOINT: '//remote-auth-gateway.discord.gg',
-        SENTRY_TAGS: {"buildId":"7956ae0a7fef17564b5e718757ad1a38d2322063","buildType":"normal"},
-        MIGRATION_SOURCE_ORIGIN: 'https://discord.com',
-        MIGRATION_DESTINATION_ORIGIN: window.location.protocol + "//" + window.location.host,
-        HTML_TIMESTAMP: Date.now(),
-        ALGOLIA_KEY: 'aca0d7082e4e63af5ba5917d5e96bed0',
-        };
+if (location.port == "") {
+FOSSCORD_HOST = location.hostname
+} else {
+FOSSCORD_HOST = location.hostname+":"+location.port
+}
+if (location.protocol == "https:") {
+FOSSCORD_GWEP = "wss://"+SPACEBAR_HOST
+} else {
+FOSSCORD_GWEP = "ws://"+SPACEBAR_HOST
+}
+
+SPACEBAR_HOST = "old.server.spacebar.chat"
+SPACEBAR_GWEP = "wss://"+"gateway."+SPACEBAR_HOST
+window.GLOBAL_ENV = {
+API_ENDPOINT: "//localhost:2022/d/api",
+API_VERSION: 9,
+GATEWAY_ENDPOINT: SPACEBAR_GWEP,
+WEBAPP_ENDPOINT: "//"+SPACEBAR_HOST,
+CDN_HOST: "cdn."+SPACEBAR_HOST,
+ASSET_ENDPOINT: "//localhost:2022",
+MEDIA_PROXY_ENDPOINT: "//"+SPACEBAR_HOST+"/media", // TODO: Fix and add actual media proxy endpoint, does it even exist in fosscord yet? 02/23/2023 MM/DD/YYYY
+WIDGET_ENDPOINT: "//"+SPACEBAR_HOST+"/widget", // TODO: Same for Media and widget
+INVITE_HOST: SPACEBAR_HOST+"/invite",
+GUILD_TEMPLATE_HOST: SPACEBAR_HOST+"/new",
+GIFT_CODE_HOST: SPACEBAR_HOST+"/gift", // TODO: Fake FOSSCORD Premium
+RELEASE_CHANNEL: "canary", // i wish this was "fosscord" instead of "canary" or other.
+MARKETING_ENDPOINT: "//"+SPACEBAR_HOST,
+BRAINTREE_KEY: "", // TODO replace with own.
+STRIPE_KEY: "", // TODO replace with own.
+NETWORKING_ENDPOINT: "//"+SPACEBAR_HOST+"/router", // TODO: Same for MEDIA, WIDGET, and NETWORK
+RTC_LATENCY_ENDPOINT: "//"+SPACEBAR_HOST+"/rtc", // TODO: Same as above + RTC
+ACTIVITY_APPLICATION_HOST: SPACEBAR_HOST+"/says", // Simon says: It's not discordsays, its fosscordsays
+PROJECT_ENV: "production",
+REMOTE_AUTH_ENDPOINT: "//"+SPACEBAR_HOST+"/rag", // TODO: RAG is REMOTE_AUTH_ENDPOINT in short, but same as RTC and NETWORKING_ENDPOINT
+SENTRY_TAGS: { buildId: "93b5e5ecc848ae630bd1c92cb4040102b00e5361", buildType: "normal" }, // Fosscord commit id instead? 
+MIGRATION_SOURCE_ORIGIN: location.protocol+"//"+SPACEBAR_HOST, 
+MIGRATION_DESTINATION_ORIGIN: location.protocol+"//"+SPACEBAR_HOST,
+HTML_TIMESTAMP: Date.now(),
+ALGOLIA_KEY: "", // TODO replace with own.
+PUBLIC_PATH: "/assets/" // TODO: Figure out if PUBLIC_PATH is just for assets.
         const localStorage = window.localStorage;
         </script>
         <script src="/assets/d170d5b12b302f315912.js"></script>
