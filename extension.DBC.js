@@ -1,4 +1,4 @@
-var dbcloginurl = "chriseric1.github.io"
+var dbcloginurl = "spacebotchat.github.io"
 
 var extraInfoSpecRequest = ["blocking", "requestHeaders"];
 var extraInfoSpecResponse = ["blocking", "responseHeaders"];
