@@ -1,4 +1,4 @@
-var dbcloginurl = "http://chriseric1.github.io/login"
+var dbcloginurl = "http://spacebotchat.github.io/login"
 
 var { app, BrowserWindow, systemPreferences } = require("electron");
 async function createWindow() {
