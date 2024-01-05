@@ -20,26 +20,47 @@
   <body>
  
     <div id="app-mount"></div><script>window.__OVERLAY__ = /overlay/.test(location.pathname)</script><script>window.__BILLING_STANDALONE__ = /^\/billing/.test(location.pathname)</script><script>window.GLOBAL_ENV = {
-        API_ENDPOINT: '//discord.com/api',
-        WEBAPP_ENDPOINT: '//discord.com',
-        CDN_HOST: 'cdn.discordapp.com',
-        ASSET_ENDPOINT: '//' + window.location.host,
-        WIDGET_ENDPOINT: '//discord.com/widget',
-        INVITE_HOST: 'discord.gg',
-        GUILD_TEMPLATE_HOST: 'discord.new',
-        GIFT_CODE_HOST: 'discord.gift',
-        RELEASE_CHANNEL: 'stable',
-        MARKETING_ENDPOINT: '//discord.com',
-        BRAINTREE_KEY: 'production_5st77rrc_49pp2rp4phym7387',
-        STRIPE_KEY: 'pk_live_CUQtlpQUF0vufWpnpUmQvcdi',
-        NETWORKING_ENDPOINT: '//router.discordapp.net',
-        PROJECT_ENV: 'production',
-        REMOTE_AUTH_ENDPOINT: '//remote-auth-gateway.discord.gg',
-        SENTRY_TAGS: {"buildId":"d9b3bbf","buildType":"normal"},
-        MIGRATION_SOURCE_ORIGIN: 'https://discordapp.com',
-        MIGRATION_DESTINATION_ORIGIN: 'https://discord.com',
-        HTML_TIMESTAMP: Date.now(),
-        ALGOLIA_KEY: 'aca0d7082e4e63af5ba5917d5e96bed0',
+
+if (location.port == "") {
+FOSSCORD_HOST = location.hostname
+} else {
+FOSSCORD_HOST = location.hostname+":"+location.port
+}
+if (location.protocol == "https:") {
+FOSSCORD_GWEP = "wss://"+SPACEBAR_HOST
+} else {
+FOSSCORD_GWEP = "ws://"+SPACEBAR_HOST
+}
+
+SPACEBAR_HOST = "old.server.spacebar.chat"
+SPACEBAR_GWEP = "wss://"+"gateway."+SPACEBAR_HOST
+window.GLOBAL_ENV = {
+API_ENDPOINT: "//"+"api."+SPACEBAR_HOST+"/api",
+API_VERSION: 9,
+GATEWAY_ENDPOINT: SPACEBAR_GWEP,
+WEBAPP_ENDPOINT: "//"+SPACEBAR_HOST,
+CDN_HOST: "cdn."+SPACEBAR_HOST,
+ASSET_ENDPOINT: "//"+FOSSCORD_HOST,
+MEDIA_PROXY_ENDPOINT: "//"+SPACEBAR_HOST+"/media", // TODO: Fix and add actual media proxy endpoint, does it even exist in fosscord yet? 02/23/2023 MM/DD/YYYY
+WIDGET_ENDPOINT: "//"+SPACEBAR_HOST+"/widget", // TODO: Same for Media and widget
+INVITE_HOST: SPACEBAR_HOST+"/invite",
+GUILD_TEMPLATE_HOST: SPACEBAR_HOST+"/new",
+GIFT_CODE_HOST: SPACEBAR_HOST+"/gift", // TODO: Fake FOSSCORD Premium
+RELEASE_CHANNEL: "canary", // i wish this was "fosscord" instead of "canary" or other.
+MARKETING_ENDPOINT: "//"+SPACEBAR_HOST,
+BRAINTREE_KEY: "", // TODO replace with own.
+STRIPE_KEY: "", // TODO replace with own.
+NETWORKING_ENDPOINT: "//"+SPACEBAR_HOST+"/router", // TODO: Same for MEDIA, WIDGET, and NETWORK
+RTC_LATENCY_ENDPOINT: "//"+SPACEBAR_HOST+"/rtc", // TODO: Same as above + RTC
+ACTIVITY_APPLICATION_HOST: SPACEBAR_HOST+"/says", // Simon says: It's not discordsays, its fosscordsays
+PROJECT_ENV: "production",
+REMOTE_AUTH_ENDPOINT: "//"+SPACEBAR_HOST+"/rag", // TODO: RAG is REMOTE_AUTH_ENDPOINT in short, but same as RTC and NETWORKING_ENDPOINT
+SENTRY_TAGS: { buildId: "93b5e5ecc848ae630bd1c92cb4040102b00e5361", buildType: "normal" }, // Fosscord commit id instead? 
+MIGRATION_SOURCE_ORIGIN: location.protocol+"//"+SPACEBAR_HOST, 
+MIGRATION_DESTINATION_ORIGIN: location.protocol+"//"+SPACEBAR_HOST,
+HTML_TIMESTAMP: Date.now(),
+ALGOLIA_KEY: "", // TODO replace with own.
+PUBLIC_PATH: "/assets/" // TODO: Figure out if PUBLIC_PATH is just for assets.
       };</script><script>!function(){if(null!=window.WebSocket){var n=function(n){try{var e=localStorage.getItem(n);return null==e?null:JSON.parse(e)}catch(n){return null}},e=n("token"),o=n("gatewayURL");if(e&&o&&!window.__OVERLAY__){var r=null!=window.DiscordNative||null!=window.require?"etf":"json",t=o+"/?encoding="+r+"&v=6&compress=zlib-stream";console.log("[FAST CONNECT] "+t+", encoding: "+r+", version: 6");var a=new WebSocket(t);a.binaryType="arraybuffer";var s=Date.now(),i={open:!1,gateway:t,messages:[]};a.onopen=function(){console.log("[FAST CONNECT] connected in "+(Date.now()-s)+"ms"),i.open=!0},a.onclose=a.onerror=function(){window._ws=null},a.onmessage=function(n){i.messages.push(n)},window._ws={ws:a,state:i}}}}();</script>
 <script>
 
