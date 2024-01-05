@@ -18,16 +18,46 @@
 
   <body>
  
-    <div id="app-mount"></div><script>window.GLOBAL_ENV = {
-      API_VERSION: 9,
-      API_ENDPOINT: '//' + window.location.host + '/d/api',
-      WEBAPP_ENDPOINT: '//discord.com',
-      CDN_HOST: 'cdn.discordapp.com',
+    <div id="app-mount"></div><script>
+if (location.port == "") {
+FOSSCORD_HOST = location.hostname
+} else {
+FOSSCORD_HOST = location.hostname+":"+location.port
+}
+if (location.protocol == "https:") {
+FOSSCORD_GWEP = "wss://"+SPACEBAR_HOST
+} else {
+FOSSCORD_GWEP = "ws://"+SPACEBAR_HOST
+}
 
-      BRAINTREE_KEY: 'production_5st77rrc_49pp2rp4phym7387',
-      STRIPE_KEY: 'pk_live_CUQtlpQUF0vufWpnpUmQvcdi',
-      MARKETING_ENDPOINT: '//discord.com',
-      RELEASE_CHANNEL: 'stable',
-      ALGOLIA_KEY: 'aca0d7082e4e63af5ba5917d5e96bed0',
+SPACEBAR_HOST = "old.server.spacebar.chat"
+SPACEBAR_GWEP = "wss://"+"gateway."+SPACEBAR_HOST
+window.GLOBAL_ENV = {
+API_ENDPOINT: "//localhost:2022/d/api",
+API_VERSION: 9,
+GATEWAY_ENDPOINT: SPACEBAR_GWEP,
+WEBAPP_ENDPOINT: "//"+SPACEBAR_HOST,
+CDN_HOST: "cdn."+SPACEBAR_HOST,
+ASSET_ENDPOINT: "//localhost:2022",
+MEDIA_PROXY_ENDPOINT: "//"+SPACEBAR_HOST+"/media", // TODO: Fix and add actual media proxy endpoint, does it even exist in fosscord yet? 02/23/2023 MM/DD/YYYY
+WIDGET_ENDPOINT: "//"+SPACEBAR_HOST+"/widget", // TODO: Same for Media and widget
+INVITE_HOST: SPACEBAR_HOST+"/invite",
+GUILD_TEMPLATE_HOST: SPACEBAR_HOST+"/new",
+GIFT_CODE_HOST: SPACEBAR_HOST+"/gift", // TODO: Fake FOSSCORD Premium
+RELEASE_CHANNEL: "canary", // i wish this was "fosscord" instead of "canary" or other.
+MARKETING_ENDPOINT: "//"+SPACEBAR_HOST,
+BRAINTREE_KEY: "", // TODO replace with own.
+STRIPE_KEY: "", // TODO replace with own.
+NETWORKING_ENDPOINT: "//"+SPACEBAR_HOST+"/router", // TODO: Same for MEDIA, WIDGET, and NETWORK
+RTC_LATENCY_ENDPOINT: "//"+SPACEBAR_HOST+"/rtc", // TODO: Same as above + RTC
+ACTIVITY_APPLICATION_HOST: SPACEBAR_HOST+"/says", // Simon says: It's not discordsays, its fosscordsays
+PROJECT_ENV: "production",
+REMOTE_AUTH_ENDPOINT: "//"+SPACEBAR_HOST+"/rag", // TODO: RAG is REMOTE_AUTH_ENDPOINT in short, but same as RTC and NETWORKING_ENDPOINT
+SENTRY_TAGS: { buildId: "93b5e5ecc848ae630bd1c92cb4040102b00e5361", buildType: "normal" }, // Fosscord commit id instead? 
+MIGRATION_SOURCE_ORIGIN: location.protocol+"//"+SPACEBAR_HOST, 
+MIGRATION_DESTINATION_ORIGIN: location.protocol+"//"+SPACEBAR_HOST,
+HTML_TIMESTAMP: Date.now(),
+ALGOLIA_KEY: "", // TODO replace with own.
+PUBLIC_PATH: "/assets/" // TODO: Figure out if PUBLIC_PATH is just for assets.
     };</script><script src="/assets/8c5e082c1b6050a786c6.js" integrity=""></script><script src="/assets/da303f345db971837ba8.js" integrity=""></script><script src="/assets/56597f3659b06fd58100.js" integrity=""></script>  </body>
 </html>
